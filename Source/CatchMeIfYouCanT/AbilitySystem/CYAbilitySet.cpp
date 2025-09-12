@@ -71,7 +71,7 @@ void UCYAbilitySet::GiveToAbilitySystem(UCYAbilitySystemComponent* CYAbilitySyst
 
 	if (!CYAbilitySystemComponent->IsOwnerActorAuthoritative())
 	{
-		// 서버가 아닌 곳에서는 어빌리티 셋을 부여하지 않는다.
+		// 서버가 아닌 곳에서는 어빌리티 셋을 부여하지 않는다
 		return;
 	}
 

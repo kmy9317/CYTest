@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "CatchMeIfYouCanT/AbilitySystem/CYAbilitySet.h"
 #include "GameFramework/Character.h"
 #include "CYCharacterBase.generated.h"
 
+class UCYAbilitySet;
 class UCYAbilitySystemComponent;
 
-UCLASS()
+UCLASS(Abstract)
 class CATCHMEIFYOUCANT_API ACYCharacterBase : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
@@ -20,8 +22,17 @@ public:
 	
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	void InitializeAbilitySets();
+	void RemoveAbilitySets();
 
 protected:
-	TWeakObjectPtr<UCYAbilitySystemComponent> AbilitySystemComponent;
+	// 약참조로 ASC 관리(Player의 경우 PlayerState의 ASC를 사용, AI의 경우 Character의 ASC를 사용)
+	TWeakObjectPtr<UCYAbilitySystemComponent> CYAbilitySystemComponent;
 
+	TArray<TObjectPtr<UCYAbilitySet>> DefaultAbilitySets;
+
+	UPROPERTY()
+	TArray<FCYAbilitySet_GrantedHandles> GrantedAbilitySetHandles;
 };
