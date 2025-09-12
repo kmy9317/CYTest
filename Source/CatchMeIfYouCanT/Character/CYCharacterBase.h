@@ -24,8 +24,4 @@ protected:
 protected:
 	TWeakObjectPtr<UCYAbilitySystemComponent> AbilitySystemComponent;
 
-	// TODO : Startup Abilities, Startup Effects, Default Attributes
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
-	TArray<TSubclassOf<UGameplayEffect>> StartupEffects;
-	TArray<TSubclassOf<UGameplayEffect>> DefaultAttributes;
 };
