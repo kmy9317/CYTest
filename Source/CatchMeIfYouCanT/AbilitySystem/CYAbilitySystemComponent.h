@@ -14,14 +14,9 @@ class CATCHMEIFYOUCANT_API UCYAbilitySystemComponent : public UAbilitySystemComp
 
 public:
 	// Sets default values for this component's properties
-	UCYAbilitySystemComponent();
+	UCYAbilitySystemComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	virtual void InitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor) override;
+	
 
-public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
 };

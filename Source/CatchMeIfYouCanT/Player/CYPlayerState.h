@@ -7,6 +7,8 @@
 #include "GameFramework/PlayerState.h"
 #include "CYPlayerState.generated.h"
 
+
+class UCYVitalSet;
 class UCYAbilitySystemComponent;
 /**
  * 
@@ -28,4 +30,7 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere, Category = "CY|PlayerState")
 	TObjectPtr<UCYAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<const UCYVitalSet> VitalSet;
 };

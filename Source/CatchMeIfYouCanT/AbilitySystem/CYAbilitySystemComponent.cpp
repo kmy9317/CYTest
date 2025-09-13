@@ -1,36 +1,27 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "CYAbilitySystemComponent.h"
 
-
-// Sets default values for this component's properties
-UCYAbilitySystemComponent::UCYAbilitySystemComponent()
+UCYAbilitySystemComponent::UCYAbilitySystemComponent(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
-
-// Called when the game starts
-void UCYAbilitySystemComponent::BeginPlay()
+void UCYAbilitySystemComponent::InitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
-	Super::BeginPlay();
+	FGameplayAbilityActorInfo* ActorInfo = AbilityActorInfo.Get();
+	check(ActorInfo);
+	check(InOwnerActor);
 
-	// ...
+	const bool bHasNewPawnAvatar = Cast<APawn>(InAvatarActor) && (InAvatarActor != ActorInfo->AvatarActor);
 	
+	Super::InitAbilityActorInfo(InOwnerActor, InAvatarActor);
+
+	// Avatar가 처음 할당되었을 경우, Avatar가 변경되었을 경우
+	if (bHasNewPawnAvatar)
+	{
+		// TODO : 커스텀 AnimInstance의 FGameplayTagBlueprintPropertyMap타입 변수 초기화 진행
+	}
 }
 
 
-// Called every frame
-void UCYAbilitySystemComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-                                              FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
 

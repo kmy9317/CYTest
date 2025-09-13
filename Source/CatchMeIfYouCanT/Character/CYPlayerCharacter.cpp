@@ -53,9 +53,9 @@ void ACYPlayerCharacter::PossessedBy(AController* NewController)
 		// 서버측에서 실행되는 ASC 캐싱 및 ASC 설정으로써 클라이언트는 OnRep_PlayerState()에서 해당 로직 진행
 		CYAbilitySystemComponent = Cast<UCYAbilitySystemComponent>(PS->GetAbilitySystemComponent());
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
-	}
 
-	// TODO : Startup Ability, Startup Effects 부여
+		InitializeAbilitySets();
+	}
 }
 
 void ACYPlayerCharacter::BeginPlay()

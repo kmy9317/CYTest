@@ -31,6 +31,7 @@ protected:
 	// 약참조로 ASC 관리(Player의 경우 PlayerState의 ASC를 사용, AI의 경우 Character의 ASC를 사용)
 	TWeakObjectPtr<UCYAbilitySystemComponent> CYAbilitySystemComponent;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CY|Abilities")
 	TArray<TObjectPtr<UCYAbilitySet>> DefaultAbilitySets;
 
 	UPROPERTY()

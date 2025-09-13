@@ -84,6 +84,14 @@ void UCYAbilitySet::GiveToAbilitySystem(UCYAbilitySystemComponent* CYAbilitySyst
 			UE_LOG(LogCY, Error, TEXT("GrantedAttributes[%d] on ability set [%s] is not valid"), SetIndex, *GetNameSafe(this));
 			continue;
 		}
+
+		UAttributeSet* NewSet = NewObject<UAttributeSet>(CYAbilitySystemComponent->GetOwner(), SetToGrant.AttributeSet);
+		CYAbilitySystemComponent->AddAttributeSetSubobject(NewSet);
+
+		if (OutGrantedHandles)
+		{
+			OutGrantedHandles->AddAttributeSet(NewSet);
+		}
 	}
 	
 	// 어빌리티 부여

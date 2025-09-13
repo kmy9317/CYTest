@@ -4,6 +4,7 @@
 #include "CYPlayerState.h"
 
 #include "CatchMeIfYouCanT/AbilitySystem/CYAbilitySystemComponent.h"
+#include "CatchMeIfYouCanT/AbilitySystem/Attributes/CYVitalSet.h"
 
 ACYPlayerState::ACYPlayerState(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,7 +12,8 @@ ACYPlayerState::ACYPlayerState(const FObjectInitializer& ObjectInitializer)
 	AbilitySystemComponent = ObjectInitializer.CreateDefaultSubobject<UCYAbilitySystemComponent>(this, TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
-	
+
+	VitalSet = CreateDefaultSubobject<UCYVitalSet>(TEXT("VitalSet"));
 	SetNetUpdateFrequency(100.0f);
 }
 
