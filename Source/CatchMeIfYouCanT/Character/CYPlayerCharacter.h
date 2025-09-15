@@ -32,6 +32,10 @@ protected:
 	void Input_Move(const FInputActionValue& InputActionValue);
 	void Input_Look(const FInputActionValue& InputActionValue);
 
+	void Input_AbilityInputTagStarted(FGameplayTag InputTag);
+	void Input_AbilityInputTagPressed(FGameplayTag InputTag);
+	void Input_AbilityInputTagReleased(FGameplayTag InputTag);
+
 	// Client측 ASC초기화 등 수행
 	virtual void OnRep_PlayerState() override;
 	

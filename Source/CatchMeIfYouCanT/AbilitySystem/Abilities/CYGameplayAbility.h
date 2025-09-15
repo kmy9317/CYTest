@@ -25,7 +25,10 @@ public:
 	UCYGameplayAbility();
 
 	virtual void OnAvatarSet(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
-	
+
+	ECYAbilityActivationPolicy GetActivationPolicy() const { return ActivationPolicy; }
+
+protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CY|AbilityActivation")
 	ECYAbilityActivationPolicy ActivationPolicy;
 };

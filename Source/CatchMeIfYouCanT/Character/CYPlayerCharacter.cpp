@@ -54,6 +54,7 @@ void ACYPlayerCharacter::PossessedBy(AController* NewController)
 		CYAbilitySystemComponent = Cast<UCYAbilitySystemComponent>(PS->GetAbilitySystemComponent());
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
 
+		// 서버에서만 어빌리티 세트를 초기화
 		InitializeAbilitySets();
 	}
 }
@@ -72,7 +73,8 @@ void ACYPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	CYInputComponent->BindNativeAction(DefaultInputConfig, CYGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ACYPlayerCharacter::Input_Move, false);
 	CYInputComponent->BindNativeAction(DefaultInputConfig, CYGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ACYPlayerCharacter::Input_Look, false);
 
-	// TODO : BindAbilityActions
+	TArray<uint32> BindHandles;
+	CYInputComponent->BindAbilityActions(DefaultInputConfig, this, &ThisClass::Input_AbilityInputTagStarted, &ThisClass::Input_AbilityInputTagPressed, &ThisClass::Input_AbilityInputTagReleased, /*out*/ BindHandles);
 }
 
 void ACYPlayerCharacter::Input_Move(const FInputActionValue& InputActionValue)
@@ -109,6 +111,36 @@ void ACYPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(Value.Y);
 	}
+}
+
+void ACYPlayerCharacter::Input_AbilityInputTagStarted(FGameplayTag InputTag)
+{
+	if (!CYAbilitySystemComponent.IsValid())
+	{
+		return;
+	}
+
+	CYAbilitySystemComponent->AbilityInputTagStarted(InputTag);
+}
+
+void ACYPlayerCharacter::Input_AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	if (!CYAbilitySystemComponent.IsValid())
+	{
+		return;
+	}
+
+	CYAbilitySystemComponent->AbilityInputTagPressed(InputTag);
+}
+
+void ACYPlayerCharacter::Input_AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	if (!CYAbilitySystemComponent.IsValid())
+	{
+		return;
+	}
+
+	CYAbilitySystemComponent->AbilityInputTagReleased(InputTag);
 }
 
 void ACYPlayerCharacter::OnRep_PlayerState()

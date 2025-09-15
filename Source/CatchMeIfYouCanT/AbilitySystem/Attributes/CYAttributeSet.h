@@ -22,7 +22,7 @@ class CATCHMEIFYOUCANT_API UCYAttributeSet : public UAttributeSet
 public:
 	UCYAttributeSet();
 
-	UWorld* GetWorld() const override;
+	virtual UWorld* GetWorld() const override;
 
 	UCYAbilitySystemComponent* GetCYAbilitySystemComponent() const;
 };
